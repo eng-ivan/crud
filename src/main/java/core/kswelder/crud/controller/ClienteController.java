@@ -55,15 +55,14 @@ public class ClienteController {
     }
 
     @PutMapping(path = "/cliente/update/{id}")
-    public ResponseEntity<ClienteDTO> update(@PathVariable("id") Long id, Cliente cliente){
-
+    public ResponseEntity<ClienteDTO> update(@PathVariable("id") Long id, @RequestBody Cliente cliente){
         return ResponseEntity.status(HttpStatus.OK).body(clienteService.update(id, cliente));
     }
 
     @DeleteMapping(path = "/cliente/delete/{id}")
-    ResponseEntity<String> delete(@PathVariable("id")Long id){
+    public String delete(@PathVariable("id") Long id){
         String response = clienteService.deleteByID(id);
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Cliente Deletado");
+        return response;
     }
 
     @GetMapping(path = "/test")

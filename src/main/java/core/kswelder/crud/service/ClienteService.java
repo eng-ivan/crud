@@ -3,16 +3,20 @@ package core.kswelder.crud.service;
 import core.kswelder.crud.enums.ClienteStatus;
 import core.kswelder.crud.model.Cliente;
 import core.kswelder.crud.model.ClienteDTO;
+import core.kswelder.crud.model.Endereco;
+import core.kswelder.crud.utils.EnderecoRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
 public class ClienteService {
 
-    private Map<Long, Cliente> map = new HashMap<>();
+    @Autowired
+    EnderecoRequest request;
+    private static Map<Long, Cliente> map = new HashMap<>();
 
     public ClienteDTO save(Cliente cliente){
         Long incrementID = map.keySet().size() + 1L;
@@ -25,14 +29,15 @@ public class ClienteService {
     }
 
     public ClienteDTO update(Long id, Cliente cliente){
+        Endereco endereco = request.requestEndereco(cliente.getEndereco());
         ClienteDTO dto = new ClienteDTO();
         dto.setId(id);
         dto.setNome(cliente.getNome());
         dto.setDataNascimento(cliente.getDataNascimento());
         dto.setDataDeAtualizacao(new Date().toString());
         dto.setStatus(cliente.getStatus());
-
-        //map.put(dto.getId(), dto);
+        dto.setEndereco(endereco);
+        map.put(id,cliente);
         return dto;
     }
 
@@ -57,13 +62,7 @@ public class ClienteService {
     }
 
     public String deleteByID(Long id){
-        try {
-            Thread.sleep(2000);
-            map.remove(id);
-        }catch (InterruptedException e){
-            System.out.println(e.getMessage());
-        }
-
+        map.remove(id);
         return "Cliente DELETADO!";
     }
 
