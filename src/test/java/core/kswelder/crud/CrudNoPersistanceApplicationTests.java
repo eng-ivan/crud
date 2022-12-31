@@ -37,4 +37,11 @@ class CrudNoPersistanceApplicationTests {
 		dto.setNome("Ivan Santos");
 		Assertions.assertEquals("Ivan Santos", dto.getNome());
 	}
+
+	@Test
+	void testStatus() {
+		ClienteDTO dto = new ClienteDTO();
+		dto.setStatus("ATIVO");
+		Assertions.assertEquals("ATIVO", dto.getStatus());
+	}
 }
