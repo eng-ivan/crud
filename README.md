@@ -18,3 +18,8 @@
 
 - [DELETE] http://localhost:8080/api/cliente/delete/{id} [Deleta cliente por id]
 
+ . Comandos para executar app (com maven instalado)
+  - mvn spring-boot:run [executa app]
+  - mvn clean install [limpa, instala e gera o .jar]
+  - mvn clean verify [limpa os arquivos de teste e os executa com cobertura]
+  - mvn test [testa a classe de test]
