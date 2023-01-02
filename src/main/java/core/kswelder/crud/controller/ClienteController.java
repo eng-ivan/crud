@@ -67,13 +67,7 @@ public class ClienteController {
 
     @GetMapping(path = "/test")
     public ResponseEntity<ConnectTest> testConnect() throws UnknownHostException {
-        String uuid = UUID.randomUUID().toString();
-        ConnectTest test = ConnectTest
-                .builder()
-                .address(InetAddress.getLocalHost())
-                .keyConnection(uuid)
-                .timestamp(new Date().toString())
-                .build();
+        ConnectTest test = clienteService.test();
         return ResponseEntity.status(HttpStatus.OK).body(test);
     }
 }

@@ -3,11 +3,14 @@ package core.kswelder.crud.service;
 import core.kswelder.crud.enums.ClienteStatus;
 import core.kswelder.crud.model.Cliente;
 import core.kswelder.crud.model.ClienteDTO;
+import core.kswelder.crud.model.ConnectTest;
 import core.kswelder.crud.model.Endereco;
 import core.kswelder.crud.utils.EnderecoRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -66,4 +69,12 @@ public class ClienteService {
         return "Cliente DELETADO!";
     }
 
+    public ConnectTest test() throws UnknownHostException {
+        String uuid = UUID.randomUUID().toString();
+        return ConnectTest.builder()
+                .address(InetAddress.getLocalHost())
+                .timestamp(new Date().toString())
+                .keyConnection(uuid)
+                .build();
+    }
 }
