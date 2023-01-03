@@ -39,13 +39,25 @@ jobs:
       
     - name: Show Git Version
       run: git --version
+     
+    - name: Pull Juice Shop Image
+      run: docker pull bkimminich/juice-shop
+    
+    - name: Run Juice Shop
+      run: docker run -d --rm -p 3000:3000 bkimminich/juice-shop  
       
     - name: Build Clean Maven Install
       run: mvn clean install
+    
+    - name: Build the Project
+      run: mvn clean install -DskipTests  
       
     - name: Build Clean Maven Verify
       run: mvn clean verify
-      
+    
+    - name: Run the Maven verify phase
+      run: mvn --batch-mode --update-snapshots verify
+    
     - name: Execute Maven Test
       run: mvn test 
 
