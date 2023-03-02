@@ -30,6 +30,7 @@ jobs:
       run: mvn -B package --file pom.xml
        
   verify:
+
       runs-on: ubuntu-latest
     - uses: actions/checkout@v3
 
